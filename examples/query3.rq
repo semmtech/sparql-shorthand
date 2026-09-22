@@ -1,0 +1,17 @@
+PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct:   <http://purl.org/dc/terms/>
+PREFIX laces: <https://hub.laces.tech/service/>
+PREFIX lfn:   <https://hub.laces.tech/laces/public/functions#>
+
+SELECT *
+WHERE {
+	SERVICE laces:label { laces:serviceParam dct:language  "[AUTO_LANGUAGE],en,nl" .
+	                      laces:serviceParam rdf:predicate (skos:prefLabel rdfs:label lfn:localname) .
+	                      laces:serviceParam rdf:subject   (?r1 $r2 <http://example.org/r3> rdf:_4) .
+	                      laces:serviceParam rdf:object    (?r1Label ?r2Name ?r3Title ?mySpecialName) . } .
+	
+	BIND (lfn:prefString(?r5, "en,nl", dct:title, skos:prefLabel, rdfs:label) AS ?r5Label) .
+}
+LIMIT 1

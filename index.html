@@ -1,0 +1,53 @@
+<html>
+<head><title>SPARQL Shorthand: Playground</title></head>
+<script src="lib/sparql-prefstring-shorthand.js"></script>
+<style>textarea { width: 100%; height: 40%; } div#examples { text-align: right; }</style>
+<body>
+
+<h1>SPARQL Shorthand: Playground</h1>
+
+<div id="examples"><a onClick="loadExample('query1.rq')">example 1</a> & <a onClick="loadExample('query2.rq')">2</a> & <a onClick="loadExample('query3.rq')">3</a></div>
+
+<textarea id="input" spellcheck="false" placeholder="SPARQL query that contains label shorthand"></textarea>
+<button onClick="updateOutput()">expand</button>
+<label for="mode">into</label>
+<select name="mode" id="mode">
+  <option value="0">default patterns</option>
+  <option value="1" selected>optionals</option>
+  <option value="2">subselect</option>
+</select>
+<br/><br/>
+<textarea id="output" spellcheck="false" placeholder="SPARQL query with label shorthand expanded"></textarea>
+<button onClick="copyOutput()">copy</button>
+
+<script>
+const inputElement = document.getElementById("input");
+const outputElement = document.getElementById("output");
+const modeElement = document.getElementById("mode");
+
+function updateOutput() {
+	setAutoLanguageSupported(true);
+	outputElement.value = expandPrefString(inputElement.value, mode.value);
+}
+
+function copyOutput() {
+	outputElement.select();
+	outputElement.setSelectionRange(0, 99999); // For mobile devices
+	navigator.clipboard.writeText(outputElement.value);
+	alert("Copied the text");
+}
+
+function loadExample(filename) {
+	fetch("examples/" + filename)
+		.then((res) => res.text())
+		.then((text) => {
+			
+			inputElement.value = text;
+			updateOutput();			
+		})
+		.catch((e) => console.error(e));
+}
+</script>
+
+</body>
+</html>	
