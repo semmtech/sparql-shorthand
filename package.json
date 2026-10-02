@@ -1,0 +1,16 @@
+{
+  "author": "Sander Stolk (sanderstolk@semmtech.nl)",
+  "name": "sparql-shorthand",
+  "description": "Library enabling shorthand notations in SPARQL queries.",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semmtech/sparql-shorthand.git"
+  },
+  "main": "lib/sparql-prefstring-shorthand.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "license": "Apache-2.0"
+}
